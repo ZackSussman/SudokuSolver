@@ -11,8 +11,13 @@ initialSeparation = canvasHeight/10
 canvas = Canvas(root, height= canvasHeight, width= canvasWidth, bg="white")
 fixOuterBarsFactor = 2
 
+
 for x in range (10):
- 
+    for y in range (10):
+        textBox = Entry(root, width=int(((canvasWidth-initialSeparation)/10)/36), bg = "white", relief='flat')
+        textBox.pack()
+        textBox.place(x = ((canvasWidth-initialSeparation)/10.0)*(x+1) + 13, y = ((canvasWidth-initialSeparation)/10.0)*(y+1) + 10 )
+
     if (x % 3 == 0):
         if (x == 0 or x == 9): 
             zack = 2
