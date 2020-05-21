@@ -22,21 +22,20 @@ class Board():
         if val < 9:
             return 9
 
-    def getBoxPositionForCoordinate(self, x ,y):
-        
-        
+    def printSets(self):
+        for row in self.sets:
+            print(row)
 
     #fills all the pieces in sets which are the given square with the given value
     def fillASquare(self, x, y, val):
-        self.sets[x][y] = val #fill this value into its row space
+        self.sets[y][x] = val #fill this value into its row space
         self.sets[x + 9][y] = val #fill this value into its collumn space
-        
         #fill this value into the box space
         box = 0
         for yTester in range(3, 10, 3):
             for xTester in range(3, 10, 3):
                 if (self.roundUpToMultipleOfThree(x) == xTester and self.roundUpToMultipleOfThree(y) == yTester):
-                    self.sets[18 + box][y] = val
+                    self.sets[18 + box][ 3*(y%3) + (x%3) ] = val
                 box = box + 1
 
 
@@ -44,4 +43,7 @@ class Board():
 
 
 b = Board()
-print(b.sets)
+for x in range(0, 9):
+    for y in range(0, 9):
+        b.fillASquare(x, y, y+1)
+b.printSets()
