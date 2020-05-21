@@ -10,11 +10,21 @@ initialSeparation = canvasHeight/10
 canvas = Canvas(root, height= canvasHeight, width= canvasWidth, bg="white")
 fixOuterBarsFactor = 2
 
+def passInfo():
+    return 
+
+solveButton = Button(text = "Solve", command = passInfo )
+gridEntries = []
+
 for x in range (10):
+    rowEntry = []
     for y in range (10):
-        textBox = Entry(root, width=int(((canvasWidth-initialSeparation)/10)/36), bg = "white", relief='flat')
+        rowEntry.append(StringVar())
+        textBox = Entry(root, width=int(((canvasWidth-initialSeparation)/10)/36), bg = "white", relief='flat', textvariable = rowEntry[y])
         textBox.pack()
-        textBox.place(x = ((canvasWidth-initialSeparation)/10.0)*(x+1) + 13, y = ((canvasWidth-initialSeparation)/10.0)*(y+1) + 10 )
+        textBox.place(x = ((canvasWidth-initialSeparation)/10.0)*(x+1) + 13, y = ((canvasWidth-initialSeparation)/10.0)*(y+1) + 10 ) 
+    gridEntries.append(rowEntry)
+
 
     if (x % 3 == 0):
         if (x == 0 or x == 9): 
@@ -29,3 +39,9 @@ for x in range (10):
 
 canvas.pack()
 mainloop()
+
+
+for row in gridEntries: 
+    for entry in row:
+        print(entry.get())
+    print("\n")

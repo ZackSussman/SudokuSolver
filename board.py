@@ -1,8 +1,9 @@
+import Canvas
+
 
 class Board(): 
 
     sets = []
-
 
     def __init__(self):
         #store 27 sets of 9 initially all 0
@@ -13,7 +14,7 @@ class Board():
                 subset.append(0)
             self.sets.append(subset)
 
-    #rounds a number up to 3, 6, or 9 
+    #rounds a number up to 3, 6, or 9, used for determining box space
     def roundUpToMultipleOfThree(self, val): 
         if val < 3:
             return 3
