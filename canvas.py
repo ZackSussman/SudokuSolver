@@ -1,5 +1,6 @@
 import tkinter as tk
 import math
+import board
 from tkinter import * 
 root = Tk()
 root.geometry('500x500')
@@ -9,13 +10,19 @@ canvasWidth = 500
 initialSeparation = canvasHeight/10
 canvas = Canvas(root, height= canvasHeight, width= canvasWidth, bg="white")
 fixOuterBarsFactor = 2
+buttonWidth = 5
+theBoard = board.Board()
 
 def passInfo():
+    for x in range(0, 9):
+        for y in range(0, 9):
+            theBoard.fillASquare(x, y, gridEntries[y][x].get())
+    theBoard.printSets()
+    
     return 
 
-solveButton = Button(text = "Solve", command = passInfo )
-solveButton.pack()
-solveButton.place(x = 500, y = 10)
+solveButton = Button(root, text = "Solve", command = passInfo, width = buttonWidth)
+solveButton.place(x = (canvasWidth-buttonWidth)/2, y = 20, anchor = CENTER)
 gridEntries = []
 
 for y in range (10):

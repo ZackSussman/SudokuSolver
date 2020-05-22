@@ -1,6 +1,3 @@
-import Canvas
-
-
 class Board(): 
 
     sets = []
@@ -39,12 +36,3 @@ class Board():
                     self.sets[18 + box][ 3*(y%3) + (x%3) ] = val
                 box = box + 1
 
-
-
-
-
-b = Board()
-for x in range(0, 9):
-    for y in range(0, 9):
-        b.fillASquare(x, y, y+1)
-b.printSets()
