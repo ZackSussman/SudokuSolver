@@ -4,9 +4,10 @@ import board
 class Algorithm:
     
     theBoard = board.Board()
-
+    solvedSquares = 0
     def __init__(self, theBoard):
         self.theBoard = theBoard
+        self.solvedSquares = 0
 
     def solveBoard(self):
         solved = False
@@ -24,6 +25,7 @@ class Algorithm:
                     if (len(plausableBoxesForRow) == 1):
                         #print("for row " + str(row) + ", we will add " + str(num) + " to (" + str(plausableBoxesForRow[0]) + ", " + str(row) )
                         self.theBoard.fillASquare(plausableBoxesForRow[0], row, num)
+                        self.solvedSquares = self.solvedSquares + 1
 
                     
 
@@ -37,6 +39,7 @@ class Algorithm:
                             #print(str(num) + "is valid for (" + str(collumn) + ", " + str(box) + ")" )
                     if (len(plausableBoxesForCollumn) == 1):
                         self.theBoard.fillASquare(collumn, plausableBoxesForCollumn[0], num)
+                        self.solvedSquares = self.solvedSquares + 1
                         
 
             #for each number, go through each square and see if there is only one box in the square that number can be 
@@ -50,6 +53,7 @@ class Algorithm:
                             #print(str(num) + "is valid for (" + str(self.theBoard.convertSquareAndKeyToX(square, key)) + ", " + str(self.theBoard.convertSquareAndKeyToY(square, key)) + ")"  )
                     if (len(plausableKeysForSquare) == 1):
                         self.theBoard.fillASquare(self.theBoard.convertSquareAndKeyToX(square, plausableKeysForSquare[0]), self.theBoard.convertSquareAndKeyToY(square, plausableKeysForSquare[0]), num) 
+                        self.solvedSquares = self.solvedSquares + 1
             
             unsolvedSquares = self.theBoard.getNumberOfUnsolvedSquares()
             if unsolvedSquares == pastNumberOfUnsolvedSquares:
@@ -61,7 +65,8 @@ class Algorithm:
                 solved = True
         
         if solved == False:
-            print("failed to solve board")
+            print("failed to solve board. Was able to solve " + str(self.solvedSquares))
+            self.theBoard.printSets()
         else:
             print("success!")
         

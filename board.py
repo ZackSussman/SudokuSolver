@@ -3,7 +3,6 @@ import TestingSets
 class Board(): 
 
     sets = []
-
     def __init__(self):
         #store 27 sets of 9 initially all 0
         #each set refers to a range of 9 values which must satisfy sudoku rules

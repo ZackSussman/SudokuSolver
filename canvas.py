@@ -15,12 +15,20 @@ fixOuterBarsFactor = 2
 buttonWidth = 5
 theBoard = board.Board()
 
+
 def loadEasy():
     for x in range(0, 9):
         for y in range(0, 9):
             val = TestingSets.easySet[x][y]
             if (val != 0):
                 gridEntries[x][y].set(val)
+   
+    return
+
+def clearBoard():
+    for x in range(0, 9):
+        for y in range(0, 9):
+            gridEntries[x][y].set('')
    
     return
 
@@ -41,10 +49,11 @@ solveButton = Button(root, text = "Solve", command = passInfo, width = buttonWid
 solveButton.place(x = (canvasWidth-buttonWidth)/2, y = 20, anchor = CENTER)
 gridEntries = []
 
-loadEasyButton = Button(root, text = "LoadEasy", command = loadEasy, width = 2*buttonWidth)
-loadEasyButton.place(x = (canvasWidth-buttonWidth)/2, y = canvasHeight - 20, anchor = CENTER)
+#loadEasyButton = Button(root, text = "LoadEasy", command = loadEasy, width = 2*buttonWidth)
+#loadEasyButton.place(x = (canvasWidth-buttonWidth)/2, y = canvasHeight - 20, anchor = CENTER)
 
-
+clearButton = Button(root, text = "Clear", command = clearBoard, width = 2*buttonWidth)
+clearButton.place(x = (canvasWidth-buttonWidth)/2, y = canvasHeight - 20, anchor = CENTER)
 
 
 for y in range(0, 10):
