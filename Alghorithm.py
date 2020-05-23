@@ -9,11 +9,8 @@ class Algorithm:
         self.theBoard = theBoard
         self.solvedSquares = 0
 
-    def solveBoard(self):
-        solved = False
-        pastNumberOfUnsolvedSquares = 81
-        while solved == False:
 
+    def checkEachGroupIfOnlyOneSpotFitsForEachNumber(self):
             #for each number, go through each row and see if there is only one box in the row that number can be 
             for num in range(1, 10):
                 for row in range(0, 9):
@@ -55,6 +52,24 @@ class Algorithm:
                         self.theBoard.fillASquare(self.theBoard.convertSquareAndKeyToX(square, plausableKeysForSquare[0]), self.theBoard.convertSquareAndKeyToY(square, plausableKeysForSquare[0]), num) 
                         self.solvedSquares = self.solvedSquares + 1
             
+
+    def forEachBoxCheckIfOnlyOneNumberCanWork(self):
+        for y in range(0, 9):
+            for x in range(0, 9):
+                plausableNums = []
+                for num in range(1, 10):
+                    if self.theBoard.isLegalToPutNumInBox(num, x, y):
+                        plausableNums.append(num)
+                if len(plausableNums) == 1:
+                    self.theBoard.fillASquare(x, y, plausableNums[0])
+                    self.solvedSquares = self.solvedSquares + 1
+
+    def solveBoard(self):
+        solved = False
+        pastNumberOfUnsolvedSquares = 81
+        
+        while solved == False:
+            self.checkEachGroupIfOnlyOneSpotFitsForEachNumber()
             unsolvedSquares = self.theBoard.getNumberOfUnsolvedSquares()
             if unsolvedSquares == pastNumberOfUnsolvedSquares:
                 break
@@ -64,6 +79,17 @@ class Algorithm:
             if (pastNumberOfUnsolvedSquares == 0):
                 solved = True
         
+        while solved == False:
+            self.forEachBoxCheckIfOnlyOneNumberCanWork()
+            unsolvedSquares = self.theBoard.getNumberOfUnsolvedSquares()
+            if unsolvedSquares == pastNumberOfUnsolvedSquares:
+                break
+            else:
+                pastNumberOfUnsolvedSquares = unsolvedSquares
+            
+            if (pastNumberOfUnsolvedSquares == 0):
+                solved = True
+
         if solved == False:
             print("failed to solve board. Was able to solve " + str(self.solvedSquares))
             self.theBoard.printSets()

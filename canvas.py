@@ -38,9 +38,10 @@ def passInfo():
         for y in range(0, 9):
             theBoard.fillASquare(x, y, gridEntries[y][x].get())
     algy = Alghorithm.Algorithm(theBoard)
-    if (algy.solveBoard()):
-        for y in range(0, 9):
-            for x in range(0, 9):
+    algy.solveBoard()
+    for y in range(0, 9):
+        for x in range(0, 9):
+            if theBoard.sets[y][x] != 0:
                 gridEntries[y][x].set(theBoard.sets[y][x]) 
     return
 
