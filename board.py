@@ -1,3 +1,5 @@
+import TestingSets
+
 class Board(): 
 
     sets = []
@@ -21,11 +23,16 @@ class Board():
             return 9
 
     def printSets(self):
+        n = 0
         for row in self.sets:
+            if (n%9 == 0):
+                print()
             print(row)
+            n = n + 1
+            
 
     def isBoxEmpty(self, x, y):
-        if (self.sets[y][x] == ''):
+        if (self.sets[y][x] == 0):
             return True
         return False
 
@@ -46,6 +53,14 @@ class Board():
             if (number == n):
                 return True
         return False
+
+    def getNumberOfUnsolvedSquares(self):
+        number = 0
+        for y in range(0, 9):
+            for x in range(0, 9):
+                if self.isBoxEmpty(x, y):
+                    number = number + 1
+        return number
 
     def isRowValid(self, row):
         for i in range(1, 10):
@@ -70,7 +85,7 @@ class Board():
         #check if the box already has a number in it
         if (self.isBoxEmpty(x, y) == False):
             return False
-        
+
         #check if the row contains num
         if (self.sets[y].count(num) > 0):
             return False
@@ -82,7 +97,7 @@ class Board():
         #check if the box contains num
         if (self.sets[18 + self.convertPointToSquare(x, y)].count(num) > 0):
             return False
-        
+         
         return True
 
     def convertPointToSquare(self, x, y):
@@ -101,6 +116,10 @@ class Board():
 
     #fills all the pieces in sets which are the given square with the given value
     def fillASquare(self, x, y, val):
+        if (val == ''):
+            val = 0
+        else:
+            val = int(val)
         self.sets[y][x] = val #fill this value into its row space
         self.sets[x + 9][y] = val #fill this value into its collumn space
         #fill this value into the box space
@@ -110,5 +129,6 @@ class Board():
                 if (self.roundUpToMultipleOfThree(x) == xTester and self.roundUpToMultipleOfThree(y) == yTester):
                     self.sets[18 + box][ 3*(y%3) + (x%3) ] = val
                 box = box + 1
+
 
 

@@ -30,11 +30,12 @@ def passInfo():
         for y in range(0, 9):
             theBoard.fillASquare(x, y, gridEntries[y][x].get())
     algy = Alghorithm.Algorithm(theBoard)
-    algy.solveBoard()
+    if (algy.solveBoard()):
+        for y in range(0, 9):
+            for x in range(0, 9):
+                gridEntries[y][x].set(theBoard.sets[y][x]) 
+    return
 
-
-    
-    return 
 
 solveButton = Button(root, text = "Solve", command = passInfo, width = buttonWidth)
 solveButton.place(x = (canvasWidth-buttonWidth)/2, y = 20, anchor = CENTER)
@@ -42,6 +43,9 @@ gridEntries = []
 
 loadEasyButton = Button(root, text = "LoadEasy", command = loadEasy, width = 2*buttonWidth)
 loadEasyButton.place(x = (canvasWidth-buttonWidth)/2, y = canvasHeight - 20, anchor = CENTER)
+
+
+
 
 for y in range(0, 10):
     if (y != 9):
@@ -64,6 +68,10 @@ for y in range(0, 10):
     else:
         line = canvas.create_line(((canvasWidth-initialSeparation)/10.0)*(y+1), (canvasWidth-initialSeparation)/10.0, ((canvasWidth-initialSeparation)/10.0)*(y+1), canvasHeight - initialSeparation, width = 3)
         line = canvas.create_line((canvasWidth-initialSeparation)/10.0, ((canvasWidth-initialSeparation)/10.0)*(y+1),  canvasHeight - initialSeparation, ((canvasWidth-initialSeparation)/10.0)*(y+1), width = 3)
+
+
+
+
 
 canvas.pack()
 mainloop()
