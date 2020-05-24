@@ -3,7 +3,7 @@ import TestingSets
 class Board(): 
 
     sets = []
-    def __init__(self):
+    def __init__(self, board):
         #store 27 sets of 9 initially all 0
         #each set refers to a range of 9 values which must satisfy sudoku rules
         for row in range(0, 27):
@@ -11,6 +11,14 @@ class Board():
             for num in range(0, 9):
                 subset.append(0)
             self.sets.append(subset)
+
+        for y in range(0, 9):
+            for x in range(0, 9):
+                self.fillASquare(x, y, board[y][x])
+
+
+
+
 
     #rounds a number up to 3, 6, or 9, used for determining box space
     def roundUpToMultipleOfThree(self, val): 
@@ -61,6 +69,16 @@ class Board():
             if (number == n):
                 return True
         return False
+
+    def getPossibleValuesForSquare(self, x, y):
+        possibleValues = []
+        for num in range(1, 10):
+            if self.isLegalToPutNumInBox(num, x, y):
+                possibleValues.append(num)
+        return possibleValues
+
+    
+
 
     def doesCollumnHaveN(self, collumn, n):
         for number in self.sets[9+collumn]:

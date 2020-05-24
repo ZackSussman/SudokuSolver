@@ -14,7 +14,7 @@ initialSeparation = canvasHeight/10
 canvas = Canvas(root, height= canvasHeight, width= canvasWidth, bg="white")
 fixOuterBarsFactor = 2
 buttonWidth = 5
-theBoard = board.Board()
+theBoard = board.Board(TestingSets.emptyBoard)
 
 
 def loadEasy():
@@ -41,7 +41,7 @@ def passInfo():
         clearBoard()
     else:
         algy = Alghorithm.Algorithm(theBoard)
-        algy.solveBoard()
+        algy.solveBoard(0)
         for y in range(0, 9):
             for x in range(0, 9):
                 if theBoard.sets[y][x] != 0:
