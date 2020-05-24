@@ -69,26 +69,23 @@ class Algorithm:
         pastNumberOfUnsolvedSquares = 81
         
         while solved == False:
-            self.checkEachGroupIfOnlyOneSpotFitsForEachNumber()
-            unsolvedSquares = self.theBoard.getNumberOfUnsolvedSquares()
-            if unsolvedSquares == pastNumberOfUnsolvedSquares:
-                break
-            else:
-                pastNumberOfUnsolvedSquares = unsolvedSquares
+            entireTechniqueUnsolvedSquares = self.theBoard.getNumberOfUnsolvedSquares()
+            pastNumberOfUnsolvedSquares = pastNumberOfUnsolvedSquares + 1
+
+            while pastNumberOfUnsolvedSquares != self.theBoard.getNumberOfUnsolvedSquares():
+                pastNumberOfUnsolvedSquares = self.theBoard.getNumberOfUnsolvedSquares()
+                self.checkEachGroupIfOnlyOneSpotFitsForEachNumber()
+
+            pastNumberOfUnsolvedSquares = pastNumberOfUnsolvedSquares + 1
+
+            while pastNumberOfUnsolvedSquares != self.theBoard.getNumberOfUnsolvedSquares():
+                pastNumberOfUnsolvedSquares = self.theBoard.getNumberOfUnsolvedSquares()
+                self.forEachBoxCheckIfOnlyOneNumberCanWork()
             
-            if (pastNumberOfUnsolvedSquares == 0):
+            if pastNumberOfUnsolvedSquares == 0:
                 solved = True
-        
-        while solved == False:
-            self.forEachBoxCheckIfOnlyOneNumberCanWork()
-            unsolvedSquares = self.theBoard.getNumberOfUnsolvedSquares()
-            if unsolvedSquares == pastNumberOfUnsolvedSquares:
+            if entireTechniqueUnsolvedSquares == self.theBoard.getNumberOfUnsolvedSquares():
                 break
-            else:
-                pastNumberOfUnsolvedSquares = unsolvedSquares
-            
-            if (pastNumberOfUnsolvedSquares == 0):
-                solved = True
 
         if solved == False:
             print("failed to solve board. Was able to solve " + str(self.solvedSquares))

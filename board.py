@@ -30,6 +30,27 @@ class Board():
             n = n + 1
             
 
+    def isBoardCompleted(self):
+        comparisonArray = [1, 1, 1, 1, 1, 1, 1, 1, 1]
+        for group in self.sets:
+            countArray = []
+            for number in range(1, 10):
+                countArray.append(group.count(number))
+            if (countArray != comparisonArray):
+                return False
+        return True
+
+    def isBoardBlatantlyWrong(self):
+        for group in self.sets:
+            countArray = []
+            for number in range(1, 10):
+                countArray.append(group.count(number))
+            for num in countArray:
+                if num > 1:
+                    return True
+        return False
+
+
     def isBoxEmpty(self, x, y):
         if (self.sets[y][x] == 0):
             return True

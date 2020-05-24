@@ -5,6 +5,7 @@ import Alghorithm
 import TestingSets
 from tkinter import * 
 root = Tk()
+root.title('Sudoku Solver')
 root.geometry('500x500')
 root.resizable(False, False);
 canvasHeight = 500
@@ -22,7 +23,6 @@ def loadEasy():
             val = TestingSets.easySet[x][y]
             if (val != 0):
                 gridEntries[x][y].set(val)
-   
     return
 
 def clearBoard():
@@ -37,12 +37,16 @@ def passInfo():
     for x in range(0, 9):
         for y in range(0, 9):
             theBoard.fillASquare(x, y, gridEntries[y][x].get())
-    algy = Alghorithm.Algorithm(theBoard)
-    algy.solveBoard()
-    for y in range(0, 9):
-        for x in range(0, 9):
-            if theBoard.sets[y][x] != 0:
-                gridEntries[y][x].set(theBoard.sets[y][x]) 
+    if theBoard.isBoardBlatantlyWrong():
+        clearBoard()
+    else:
+        algy = Alghorithm.Algorithm(theBoard)
+        algy.solveBoard()
+        for y in range(0, 9):
+            for x in range(0, 9):
+                if theBoard.sets[y][x] != 0:
+                    gridEntries[y][x].set(theBoard.sets[y][x]) 
+
     return
 
 
