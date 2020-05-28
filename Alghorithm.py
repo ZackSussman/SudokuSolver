@@ -93,22 +93,23 @@ class Algorithm:
                 break
 
         if solved == False:
-            #guesses will store all the squares that can be one of two numbers
-            guesses = []
-            #squares will store the coordinates of each piece in guesses
-            squaresForGuesses = []
-            for y in range(0, 9):
-                for x in range(0, 9):
-                    possibleValuesForSquare = self.guessingBoards[solvingBoardNumber].getPossibleValuesForSquare(x, y)
-                    if len(possibleValuesForSquare) == 2:
-                        guesses.append(possibleValuesForSquare)
-                        squaresForGuesses.append([x, y])
-            for pairIndex in range(0, len(guesses)):
-                boardCopy = board.Board(self.guessingBoards[0].sets)
-                for guessIndex in range(0, 2):
-                    boardCopy.fillASquare(squaresForGuesses[pairIndex][0], squaresForGuesses[pairIndex][1], guesses[pairIndex][guessIndex])
-                    self.guessingBoards.append(boardCopy)
-                    return self.solveBoard(solvingBoardNumber + 1)
+            for trial in range(0, len(self.guessingBoards)):
+                #guesses will store all the squares that can be one of two numbers
+                guesses = []
+                #squares will store the coordinates of each piece in guesses
+                squaresForGuesses = []
+                for y in range(0, 9):
+                    for x in range(0, 9):
+                        possibleValuesForSquare = self.guessingBoards[trial].getPossibleValuesForSquare(x, y)
+                        if len(possibleValuesForSquare) == 2:
+                            guesses.append(possibleValuesForSquare)
+                            squaresForGuesses.append([x, y])
+                for pairIndex in range(0, len(guesses)):
+                    boardCopy = board.Board(self.guessingBoards[trial].sets)
+                    for guessIndex in range(0, 2):
+                        boardCopy.fillASquare(squaresForGuesses[pairIndex][0], squaresForGuesses[pairIndex][1], guesses[pairIndex][guessIndex])
+                        self.guessingBoards.append(boardCopy)
+                        return self.solveBoard(solvingBoardNumber + 1)
                     
 
             
